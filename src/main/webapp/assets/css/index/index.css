@@ -1,0 +1,51 @@
+main {
+    overflow: hidden;
+}
+
+main section {
+    width: 100vw;
+    height: 100vh;
+    /* background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat; */
+    position: relative;
+    border-bottom: 1px solid #000;
+}
+
+main section:last-child {
+    border: none;
+}
+
+section.section_01 .section_01_box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+section.section_01 .section_01_box h2, .section_02 h2 {
+    font-size: 45px;
+    font-weight: 600;
+    color: #222;
+    /* text-shadow: 5px 3px 5px #0F0704; */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section_02 h2 {
+    margin-top: 120px;
+    margin-bottom: 100px;
+}
+
+section.section_01 .section_01_box input {
+    width: 800px;
+    height: 70px;
+    border: 10px solid darkblue;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.slider_box {
+    width: 1200px;
+    margin: 0 auto;;
+}
