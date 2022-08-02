@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenart.book_service.mapper.LibraryMapper">
+    <select id="selectLibraryList" resultType="com.greenart.book_service.data.LibraryInfoVO">
+        SELECT *
+        FROM library_info
+        where li_name like '%${keyword}%'
+        limit 6 offset #{offset}
+    </select>
+    <select id="selectLibraryPageCnt" resultType="java.lang.Integer">
+        select ceil(count(*)/6) from library_info;
+    </select>
+</mapper>

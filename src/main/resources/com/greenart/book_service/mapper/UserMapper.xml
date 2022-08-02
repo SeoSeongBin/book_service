@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenart.book_service.mapper.UserMapper">
+    <insert id="insetUserInfo">
+        INSERT INTO user_info
+        (ui_id, ui_pwd, ui_name, ui_nickname, ui_bir_dt, ui_gen)
+        VALUES(#{ui_id}, #{ui_pwd}, #{ui_name}, #{ui_nickname}, #{ui_bir_dt}, #{ui_gen});
+    </insert>
+    <select id="loginUser" resultType="com.greenart.book_service.data.UserInfoVO">
+        SELECT ui_seq, ui_id, ui_pwd, ui_name, ui_nickname, ui_bir_dt, ui_gen, ui_reg_dt, ui_status
+        FROM user_info
+        where ui_id = #{ui_id} and ui_pwd = #{ui_pwd}
+    </select>
+    <select id="selectUserInfo" resultType="com.greenart.book_service.data.UserInfoVO">
+        SELECT ui_seq, ui_id, ui_pwd, ui_name, ui_nickname, ui_bir_dt, ui_gen, ui_reg_dt, ui_status
+        FROM user_info
+        where ui_seq = #{seq}
+    </select>
+    <update id="updateUserInfo">
+        UPDATE user_info
+        SET ui_pwd=#{ui_pwd}, ui_name=#{ui_name}, ui_nickname=#{ui_nickname}, ui_bir_dt=#{ui_bir_str}, ui_gen=#{ui_gen}
+        WHERE ui_seq=#{ui_seq};
+    </update>
+</mapper>

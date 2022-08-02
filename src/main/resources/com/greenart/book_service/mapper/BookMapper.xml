@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenart.book_service.mapper.BookMapper">
+    <select id="selectBookInfo" resultType="com.greenart.book_service.data.BookInfoVO">
+        select a.*, b.*, c.bimg_file_name, d.si_summary, e.li_name, f.*
+        from book_info a
+        left outer join book_img c
+        on a.bi_seq = c.bimg_bi_seq 
+        left outer join (
+        	select *,
+        	count(case when blk_status=1 then 1 end) as book_like_cnt
+        	from book_like group by blk_bi_seq
+        ) f
+        on a.bi_seq = f.blk_bi_seq
+        left outer join category_info b
+        on a.bi_ci_seq = b.ci_seq
+        left outer join summary_info d
+        on a.bi_seq = d.si_bi_seq
+        left outer join library_info e
+        on a.bi_li_seq = e.li_seq
+        where bi_name like '%${keyword}%'
+        limit 10 offset #{offset} 
+    </select>
+    <select id="getBookInfo" resultType="java.lang.Integer">
+        select ceil(count(*)/10) from book_info
+    </select>
+    <select id="getBookDetail" resultType="com.greenart.book_service.data.BookInfoVO">
+        select a.*, b.*, c.bimg_file_name, d.si_summary, e.li_name, f.*
+        from book_info a
+        left outer join book_img c
+        on a.bi_seq = c.bimg_bi_seq 
+        left outer join (
+        	select *,
+        	count(case when blk_status=1 then 1 end) as book_like_cnt
+        	from book_like group by blk_bi_seq
+        ) f
+        on a.bi_seq = f.blk_bi_seq
+        left outer join category_info b
+        on a.bi_ci_seq = b.ci_seq
+        left outer join summary_info d
+        on a.bi_seq = d.si_bi_seq
+        left outer join library_info e
+        on a.bi_li_seq = e.li_seq
+        where bi_seq = #{seq}
+    </select>
+    <insert id="insertBookLike">
+        INSERT INTO book_like
+        (blk_ui_seq, blk_bi_seq, blk_status)
+        VALUES(#{blk_ui_seq}, #{blk_bi_seq}, 1);
+    </insert>
+    <update id="updateBookLike">
+        UPDATE book_like
+        SET blk_status=#{blk_status}
+        WHERE blk_ui_seq=#{blk_ui_seq};
+    </update>
+    <select id="selectBookLikeInfo" resultType="com.greenart.book_service.data.BookLikeVO">
+        SELECT blk_seq, blk_ui_seq, blk_bi_seq, blk_status
+        FROM book_like
+        where blk_bi_seq = #{seq}
+    </select>
+    <select id= "selectBookBest" resultType="com.greenart.book_service.data.BookInfoVO">
+        select a.*, b.*, c.bimg_file_name, d.si_summary, e.li_name, f.*
+        from book_info a
+        left outer join book_img c
+        on a.bi_seq = c.bimg_bi_seq 
+        left outer join (
+        	select *,
+        	count(case when blk_status=1 then 1 end) as book_like_cnt
+        	from book_like group by blk_bi_seq
+        ) f
+        on a.bi_seq = f.blk_bi_seq
+        left outer join category_info b
+        on a.bi_ci_seq = b.ci_seq
+        left outer join summary_info d
+        on a.bi_seq = d.si_bi_seq
+        left outer join library_info e
+        on a.bi_li_seq = e.li_seq
+        where bi_ci_seq = #{seq}
+        order by book_like_cnt desc
+        limit 4
+    </select>
+    <select id="selectCateInfo" resultType="com.greenart.book_service.data.CategoryInfoVO">
+        SELECT ci_seq, ci_name
+        FROM category_info
+    </select>
+</mapper>

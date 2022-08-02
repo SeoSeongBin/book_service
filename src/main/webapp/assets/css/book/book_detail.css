@@ -1,0 +1,84 @@
+main .page_title {
+    margin-top: 120px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+main section {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.book_info_wrap {
+    vertical-align: top;
+    margin-bottom: 30px;
+    padding: 30px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+main .book_info {
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+main .book_info .book_img_area {
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+    margin-right: 50px;
+}
+
+main .book_info .book_img_area img {
+    width: 100%;
+}
+
+main .book_info .book_info_area {
+    display: inline-block;
+    width: 646px;
+}
+
+main .book_info .book_info_area h3 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+main .book_info .book_info_area p{
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.comment {
+    border-top: 1px solid #ddd;
+}
+
+.comment .commet_area_box, .comment .commet_write_area {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment .commet_area .user_id, .comment .commet_write_area .user_info {
+    display: inline-block;
+    width: 15%;
+    vertical-align: top;
+}
+
+.comment .commet_area .comment_text {
+    display: inline-block;
+}
+
+.comment .commet_write_area textarea {
+    width: 83%;
+    resize: none;
+    overflow-y: scroll;
+}
+.mod_comment_text, .mod_cancel {
+    display: none;
+}
+.like {
+    cursor: pointer;
+}
+.like_mod {
+    cursor: pointer;
+}

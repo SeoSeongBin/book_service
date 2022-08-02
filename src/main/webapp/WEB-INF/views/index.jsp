@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/index/index.css">
     <script src="/assets/js/index/slick.js"></script>
+    <script src="/assets/js/index/index.js"></script>
     <title>Document</title>
     
 </head>
@@ -17,45 +18,29 @@
         <section class="section_01">
             <div class="section_01_box">
                 <h2>도서 검색</h2>
-                <form action="/book/book">
-                    <input type="text">
-                </form>
+                    <input id="keyword">
+                    <button id="search">검색</button>
             </div>
         </section>
 
         <section class="section_02">
             <h2>베스트 도서</h2>
-            <div class="slider_box">
-            <div class="swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="http://via.placeholder.com/200x200" alt="banner">
-                        <h3>도서명</h3>
-                        <p>줄거리</p>
+            <div class="tab_menu">
+                <div class="tab_menu_button">
+                    <!-- <button cate-seq="">전체</button> -->
+                </div>
+                <div class="book_area">
+                    <div class="book_info" onclick="location.href='';">
+                        <div class="book_img">
+                            <img src="http://via.placeholder.com/300x330" alt="">
+                        </div>
+                        <div class="book_name">
+                            <p>책이름</p>
+                            <p>줄거리</p>
+                        </div>
                     </div>
-                    <div class="swiper-slide">
-                        <img src="http://via.placeholder.com/200x200" alt="banner">
-                        <h3>도서명</h3>
-                        <p>줄거리</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="http://via.placeholder.com/200x200" alt="banner">
-                        <h3>도서명</h3>
-                        <p>줄거리</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="http://via.placeholder.com/200x200" alt="banner">
-                        <h3>도서명</h3>
-                        <p>줄거리</p>
-                    </div>
-                    <div class="btn_area">
-                        <div class="left_btn"></div>
-                        <div class="right_btn"></div>
-                    </div>
-
                 </div>
             </div>
-        </div>
         </section>
     </main>
 </body>

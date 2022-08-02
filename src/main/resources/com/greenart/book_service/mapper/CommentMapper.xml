@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenart.book_service.mapper.CommentMapper">
+    <select id="selectCommentList" resultType="com.greenart.book_service.data.CommentInfoVO">
+        select a.*, c.ui_id, c.ui_nickname, b.*
+        from comment_info a
+        left outer join(
+           select *,
+        	count(case when cl_status=1 then 1 end) as like_cnt
+        	from comment_like group by cl_cmi_seq
+        ) b 
+        on a.cmi_seq = b.cl_cmi_seq
+        left outer join user_info c
+        on a.cmi_ui_seq = c.ui_seq
+        where cmi_bi_seq=#{seq}
+        limit 10 offset #{offset}
+    </select>
+    <select id="selectCommentBySeq" resultType="java.lang.Integer">
+        select ceil(count(*)/10) from comment_info
+    </select>
+    <select id="selectCommentBest" resultType="com.greenart.book_service.data.CommentInfoVO">
+        select a.*, c.ui_id, c.ui_nickname, b.*
+        from comment_info a
+        left outer join(
+           select *,
+        	count(case when cl_status=1 then 1 end) as like_cnt
+        	from comment_like group by cl_cmi_seq
+        ) b 
+        on a.cmi_seq = b.cl_cmi_seq
+        left outer join user_info c
+        on a.cmi_ui_seq = c.ui_seq
+        where cmi_bi_seq=#{seq}
+        order by like_cnt desc
+        limit 3
+    </select>
+    <insert id="insertComment">
+        INSERT INTO comment_info
+        (cmi_ui_seq, cmi_bi_seq, cmi_summary)
+        VALUES(#{cmi_ui_seq}, #{cmi_bi_seq}, #{cmi_summary});
+    </insert>
+    <select id="selectCommentReportInfo" resultType="com.greenart.book_service.data.CommentInfoVO">
+        select
+            a.*, b.ui_id, b.ui_nickname, c.bi_seq
+            from comment_info as a
+            left outer join user_info as b
+            on a.cmi_ui_seq = b.ui_seq
+            left outer join book_info as c
+            on a.cmi_bi_seq = c.bi_seq
+            where a.cmi_seq = #{seq}
+    </select>
+    <insert id="insertReport">
+        INSERT INTO comment_report
+        (cr_ui_seq, cr_cmi_seq, cr_reason)
+        VALUES(#{cr_ui_seq}, #{cr_cmi_seq}, #{cr_reason});
+    </insert>
+    <delete id="deleteComment">
+        DELETE FROM comment_info
+        WHERE cmi_seq=#{seq}
+    </delete>
+    <update id="updateComment">
+        UPDATE comment_info
+        SET cmi_summary=#{cmi_summary}, cmi_mod_dt=CURRENT_TIMESTAMP
+        WHERE cmi_seq=#{cmi_seq};
+    </update>
+    <insert id="insertCommentLike">
+        INSERT INTO comment_like
+        (cl_ui_seq, cl_cmi_seq, cl_status)
+        VALUES(#{cl_ui_seq}, #{cl_cmi_seq}, 1);
+    </insert>
+    <update id="updateCommentLike">
+        UPDATE comment_like
+        SET cl_status=#{cl_status}
+        WHERE cl_seq=#{cl_seq};
+    </update>
+</mapper>

@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
 </head>
 <body>
@@ -38,8 +39,14 @@
                 </ul>
             </nav>
             <div class="nav_user">
-                <a href="/login">로그인</a>
-                <a href="/join">회원가입</a>
+                <c:if test="${loginUser == null}">
+                    <a href="/login">로그인</a>
+                    <a href="/join">회원가입</a>
+                </c:if>
+                <c:if test="${loginUser != null}">
+                    <a href="/mypage">${loginUser.ui_id}</a>
+                    <a href="/logout">로그아웃</a>
+                </c:if>
             </div>
         </div>
     </header>
