@@ -51,12 +51,31 @@ function selectBestBookList(seq) {
                         '<img src="/img/book/'+r.BookBestList[i].bimg_file_name+'" alt="">'+
                     '</div>'+
                     '<div class="book_name">'+
-                        '<p>'+r.BookBestList[i].bi_name+'</p>'+
-                        '<p>'+r.BookBestList[i].si_summary+'</p>'+
+                        '<p class="book_title">'+r.BookBestList[i].bi_name+'</p>'+
+                        '<p class="book_summary">'+r.BookBestList[i].si_summary+'</p>'+
                     '</div>'+
                 '</div>'
                 $(".book_area").append(tag);
             }
+
+            $('.book_title').each(function(){
+
+                let str = $(this).html();
+                // Cutstring
+                if(str.length > 8) {
+                    var textCut = $(this).text().substring( 0, 8 );
+                    $(this).html(textCut+"...");
+                }
+            });
+            $('.book_summary').each(function(){
+
+                let str = $(this).html();
+                // Cutstring
+                if(str.length > 50) {
+                    var textCut = $(this).text().substring( 0, 50 );
+                    $(this).html(textCut+"...");
+                }
+            });
         }
     })
 }

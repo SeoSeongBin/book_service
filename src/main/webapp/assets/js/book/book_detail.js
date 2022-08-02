@@ -329,8 +329,13 @@ function getCommentList(seq, page, ui_seq) {
             });
 
             $(".report").click(function(){
+                $(".report_popup").show();
                 getCommentInfo($(this).attr("cmi-seq"));
             });
+
+            $("#report_close").click(function(){
+                $(".report_popup").hide();
+            })
         }
     });
 }

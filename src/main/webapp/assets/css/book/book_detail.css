@@ -1,3 +1,7 @@
+main {
+    overflow: hidden;
+}
+
 main .page_title {
     margin-top: 120px;
     text-align: center;
@@ -81,4 +85,24 @@ main .book_info .book_info_area p{
 }
 .like_mod {
     cursor: pointer;
+}
+
+.report_popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 100000;
+}
+
+.report_popup .popup_box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 50px;
 }

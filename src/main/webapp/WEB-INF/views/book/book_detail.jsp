@@ -75,6 +75,7 @@
                     <option value="3">비하발언</option>
                 </select>
                 <button id="report">신고</button>
+                <button id="report_close">닫기</button>
             </div>
         </div>
     </main>
